@@ -11,4 +11,5 @@ public:
     void log_instruction(void);
     void log_memaccess(uint64_t address);
     ~TraceRecorder(void);
+    void close(void);
 };

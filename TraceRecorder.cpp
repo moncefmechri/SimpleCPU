@@ -26,3 +26,8 @@ TraceRecorder::~TraceRecorder(void)
 {
     trace_file.write((const char*) &current_instruction_count, sizeof(current_instruction_count));
 }
+
+void TraceRecorder::close(void)
+{
+    trace_file.close();
+}
