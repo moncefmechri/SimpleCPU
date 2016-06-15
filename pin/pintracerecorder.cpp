@@ -13,7 +13,7 @@ KNOB<BOOL> KnobPinPlayReplayer(KNOB_MODE_WRITEONCE,
                       "pintool", "replay", "0",
                       "Activate the pinplay replayer");
 
-KNOB<string> KnobOut(KNOB_MODE_WRITEONCE, "pintool", "output", "output.trace", "Trace file ");
+KNOB<string> KnobOut(KNOB_MODE_WRITEONCE, "pintool", "o", "output.trace", "Trace file ");
 
 unique_ptr<TraceRecorder> recorder;
 
@@ -35,7 +35,8 @@ void fini(int code, void* v)
 }
 
 void instruction(INS ins, void* v)
-{    INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR) log_instruction, IARG_END);
+{
+    INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR) log_instruction, IARG_END);
 
     const int nb_mem_operands = INS_MemoryOperandCount(ins);
     for (int mem_op = 0; mem_op < nb_mem_operands; ++mem_op)
