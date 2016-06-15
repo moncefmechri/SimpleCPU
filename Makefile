@@ -1,9 +1,12 @@
 CXXFLAGS=-g -Wall -O2 -std=c++11
 
-all: test_trace
+all: test_trace dump_trace
 
 test_trace: TraceRecorder.o TraceReplayer.o
 	$(CXX) $(CXXFLAGS) -o test_trace test_trace.cpp TraceRecorder.o TraceReplayer.o
+
+dump_trace: TraceReplayer.o
+	$(CXX) $(CXXFLAGS) -o dump_trace dump_trace.cpp TraceReplayer.o
 
 TraceRecorder.o: TraceRecorder.cpp TraceRecorder.h
 	$(CXX) $(CXXFLAGS) -c TraceRecorder.cpp
