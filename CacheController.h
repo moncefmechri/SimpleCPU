@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <unordered_map>
 
 #include "DualCoreExclusiveHierarchy.h"
@@ -15,7 +16,7 @@ class CacheController
      * gcc <= 4.9.3 does not support enum class types as key. See
      * https://stackoverflow.com/questions/18837857/cant-use-enum-class-as-unordered-map-key */
     std::unordered_map<int, unsigned> latencies;
-    CacheStats L1_stats[2];
+    std::array<CacheStats, 2> L1_stats;
     CacheStats L2_stats;
 
 public:

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <iostream>
 #include <libcachesim/CacheToolbox.h>
 
@@ -11,10 +12,10 @@ class SimpleCPU
     TraceReplayer replayer_0;
     TraceReplayer replayer_1;
     unsigned instruction_latency;
-    uint64_t instruction_count[2];
-    uint64_t mem_accesses[2];
-    uint64_t cycles[2];
 
+    std::array<uint64_t, 2> instruction_count;
+    std::array<uint64_t, 2> mem_accesses;
+    std::array<uint64_t, 2> cycles;
     CacheController cache_controller;
 public:
     SimpleCPU(const std::string& filename_0, const std::string& filename_1,
