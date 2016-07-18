@@ -176,16 +176,27 @@ void SimpleCPU::run(void)
 
 void SimpleCPU::print_statistics(std::ostream& os)
 {
-    //TODO: Print cache stats
+    auto L1_stats = cache_controller.get_L1_stats();
+    CacheStats L2_stats = cache_controller.get_L2_stats();
+
     os << "==Core 0==" << std::endl;
     os << "Instructions: " << instruction_count[0] << std::endl;
     os << "Memory accesses: " << mem_accesses[0] << std::endl;
     os << "Cycles: " << cycles[0] << " (CPI: " << cycles[0] / (float) instruction_count[0] << ')' << std::endl;
+    os << "L1 stats:" << std::endl;
+    print_cache_stats(L1_stats[0], os);
+    os << std::endl;
 
     os << "==Core 1==" << std::endl;
     os << "Instructions: " << instruction_count[1] << std::endl;
     os << "Memory accesses: " << mem_accesses[1] << std::endl;
     os << "Cycles: " << cycles[1] << " (CPI: " << cycles[1] / (float) instruction_count[1] << ')' << std::endl;
+    os << "L1 stats:" << std::endl;
 
+    print_cache_stats(L1_stats[1], os);
+    os << std::endl;
+
+    os << "==Shared L2==" << std::endl;
+    print_cache_stats(L2_stats, os);
 }
 
