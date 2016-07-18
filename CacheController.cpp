@@ -1,3 +1,5 @@
+#include <array>
+
 #include "CacheController.h"
 
 #include <libcachesim/ExclusiveCache.h>
@@ -33,4 +35,14 @@ unsigned CacheController::access(addr_t address, unsigned tid)
     }
 
     return latencies[static_cast<int>(status)];
+}
+
+std::array<CacheStats, 2> CacheController::get_L1_stats(void) const
+{
+    return L1_stats;
+}
+
+CacheStats CacheController::get_L2_stats(void) const
+{
+    return L2_stats;
 }

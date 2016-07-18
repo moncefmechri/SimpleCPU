@@ -24,4 +24,7 @@ public:
                     unsigned L1_latency, unsigned L2_latency, unsigned dram_latency);
 
     unsigned access(addr_t address, unsigned tid);
+
+    std::array<CacheStats, 2> get_L1_stats(void) const;
+    CacheStats get_L2_stats(void) const;
 };
