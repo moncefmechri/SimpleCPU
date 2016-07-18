@@ -10,7 +10,11 @@
 class CacheController
 {
     DualCoreExclusiveHierarchy hierarchy;
-    std::unordered_map<ExclusiveCache::ACCESS_STATUS, unsigned> latencies;
+
+    /* int is used as the key type instead of ACCESS_STATUS because
+     * gcc <= 4.9.3 does not support enum class types as key. See
+     * https://stackoverflow.com/questions/18837857/cant-use-enum-class-as-unordered-map-key */
+    std::unordered_map<int, unsigned> latencies;
     CacheStats L1_stats[2];
     CacheStats L2_stats;
 
