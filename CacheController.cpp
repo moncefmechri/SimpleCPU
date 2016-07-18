@@ -15,5 +15,22 @@ unsigned CacheController::access(addr_t address, unsigned tid)
 {
     const ExclusiveCache::ACCESS_STATUS status = hierarchy.access(address, tid);
 
+    L1_stats[tid].log_access();
+
+    switch (status)
+    {
+        case ExclusiveCache::ACCESS_STATUS::L1_HIT:
+            break;
+        case ExclusiveCache::ACCESS_STATUS::L1_MISS_L2_HIT:
+            L1_stats[tid].log_miss();
+            L2_stats.log_access();
+            break;
+        case ExclusiveCache::ACCESS_STATUS::L1_MISS_L2_MISS:
+            L1_stats[tid].log_miss();
+            L2_stats.log_access();
+            L2_stats.log_miss();
+            break;
+    }
+
     return latencies[static_cast<int>(status)];
 }
