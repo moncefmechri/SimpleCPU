@@ -17,7 +17,7 @@ class CacheController
      * https://stackoverflow.com/questions/18837857/cant-use-enum-class-as-unordered-map-key */
     std::unordered_map<int, unsigned> latencies;
     std::array<CacheStats, 2> L1_stats;
-    CacheStats L2_stats;
+    std::array<CacheStats, 2> L2_stats;
 
 public:
     CacheController(const CacheConfig& L1_config, const CacheConfig& L2_config,
@@ -26,5 +26,5 @@ public:
     unsigned access(addr_t address, unsigned tid);
 
     std::array<CacheStats, 2> get_L1_stats(void) const;
-    CacheStats get_L2_stats(void) const;
+    std::array<CacheStats, 2> get_L2_stats(void) const;
 };
