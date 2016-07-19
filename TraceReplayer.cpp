@@ -11,7 +11,7 @@ using namespace std;
 TraceReplayer::TraceReplayer(const string& filename) : trace_file(filename, ios::binary), clean_eof(false)
 {
     if (trace_file.fail())
-        throw ios_base::failure("Could not open input file " + filename);
+        throw ios_base::failure("Could not open trace file " + filename);
 
     next_record = read_next_record();
 }
