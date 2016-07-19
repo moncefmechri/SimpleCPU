@@ -18,7 +18,7 @@ class SimpleCPU
     std::array<uint64_t, 2> cycles;
     CacheController cache_controller;
 public:
-    SimpleCPU(const std::string& filename_0, const std::string& filename_1,
+    SimpleCPU(const std::string& trace_file_0, const std::string& trace_file_1,
               const CacheConfig& L1_config, const CacheConfig& L2_config,
               unsigned instruction_latency, unsigned L1_latency, unsigned L2_latency,
               unsigned dram_latency);

@@ -4,11 +4,8 @@
 #include "SimpleCPU.h"
 
 
-SimpleCPU::SimpleCPU(const std::string& filename_0, const std::string& filename_1,
-                     const CacheConfig& L1_config, const CacheConfig& L2_config,
-                     unsigned int instruction_latency, unsigned int L1_latency,
-                     unsigned int L2_latency, unsigned int dram_latency)
-    : replayer_0(filename_0), replayer_1(filename_1), instruction_latency(instruction_latency),
+SimpleCPU::SimpleCPU(const std::string& trace_file_0, const std::string& trace_file_1, const CacheConfig& L1_config, const CacheConfig& L2_config, unsigned int instruction_latency, unsigned int L1_latency, unsigned int L2_latency, unsigned int dram_latency)
+    : replayer_0(trace_file_0), replayer_1(trace_file_1), instruction_latency(instruction_latency),
       cache_controller(L1_config, L2_config, L1_latency, L2_latency, dram_latency)
 {
     instruction_count[0] = 0;
