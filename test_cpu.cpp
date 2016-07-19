@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include "SimpleCPU.h"
 
 #include <libcachesim/CacheToolbox.h>
@@ -8,16 +10,17 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    if (argc != 3)
+    if (argc != 5)
     {
-        cerr << "Must provide two filenames as arguments" << endl;
+        cerr << "Must provide two filenames and two cache sizes (L1 and L2) as arguments" << endl;
         exit(1);
     }
 
-    CacheConfig L1_config(8*1024, 64, 64);
-    CacheConfig L2_config(L1_config);
+    const unsigned L1_size = stoul(argv[3]);
+    const unsigned L2_size = stoul(argv[4]);
+    CacheConfig L1_config(L1_size, 64, 64);
+    CacheConfig L2_config(L2_size, 64, 64);
     SimpleCPU cpu(argv[1], argv[2], L1_config, L2_config, 1, 1, 1, 50);
-
 
     cpu.run();
 }
