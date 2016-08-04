@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 
     CacheConfig L1_config(L1_size, L1_assoc, 64);
     CacheConfig L2_config(L2_size, L2_assoc, 64);
-    SimpleCPU cpu(argv[1], argv[2], L1_config, L2_config, 1, 1, 1, 50);
+    SimpleCPU cpu(argv[1], argv[2], L1_config, L2_config, 1, 1, 10, 130);
 
     cpu.run();
 }
