@@ -13,8 +13,6 @@ using namespace std;
 unsigned compute_L2_associativity(unsigned L1_size, unsigned L1_assoc, unsigned L2_size)
 {
     const float ratio = L2_size / (float) L1_size;
-    cout << ratio << endl;
-    cout << "L2 assoc: " << L1_assoc * ratio << endl;
     return L1_assoc * ratio;
 }
 
