@@ -3,9 +3,12 @@
 import sys
 from collections import Counter, defaultdict
 
+import TraceReplayer
+
 
 def align(value, alignment):
     return value & ~(alignment - 1)
+
 
 class Metadata(object):
     def __init__(self, window_id, access_time):
@@ -81,3 +84,18 @@ class Sampler(object):
             self.watchpoint_metadata.clear()
 
         self.rdist_hists.default_factory = None
+
+
+def sample_trace_file(filename, window_size, sampling_rate):
+    replayer = TraceReplayer.TraceReplayer(filename)
+
+    s = Sampler(window_size, sampling_rate)
+    for nb_instructions, accesses in replayer:
+        s.log_instructions(nb_instructions)
+        if accesses: #to handle the last record
+            for access in accesses:
+                s.access(access)
+
+    s.finalize()
+
+    return s.rdist_hists, s.nb_instructions_per_window
